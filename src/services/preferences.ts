@@ -1,9 +1,12 @@
+import type { AppLanguage } from '../i18n/messages';
+
 export type Theme = 'light' | 'dark';
 export type DefaultLocation = 'gym' | 'home';
 
 export interface PreferencesState {
   theme: Theme;
   defaultLocation: DefaultLocation;
+  language: AppLanguage;
 }
 
 const STORAGE_KEY = 'workoutInbar:preferences';
@@ -11,6 +14,7 @@ const STORAGE_KEY = 'workoutInbar:preferences';
 const defaultPreferences: PreferencesState = {
   theme: 'dark',
   defaultLocation: 'gym',
+  language: 'en',
 };
 
 export function loadPreferences(): PreferencesState {
@@ -28,8 +32,10 @@ export function loadPreferences(): PreferencesState {
       parsed.defaultLocation === 'gym' || parsed.defaultLocation === 'home'
         ? parsed.defaultLocation
         : defaultPreferences.defaultLocation;
+    const language: AppLanguage =
+      parsed.language === 'he' || parsed.language === 'en' ? parsed.language : defaultPreferences.language;
 
-    return { theme, defaultLocation };
+    return { theme, defaultLocation, language };
   } catch {
     return defaultPreferences;
   }

@@ -1,4 +1,5 @@
-import { Exercise, WorkoutPlan, WorkoutVariant, WorkoutCategory, Location } from '../types/workout';
+import { WorkoutVariant, WorkoutCategory, Location } from '../types/workout';
+import { createWorkoutData } from './workoutPlanBuilder';
 
 const baseWorkoutData: Record<WorkoutCategory, Record<Location, WorkoutVariant>> = {
   upper: {
@@ -429,15 +430,6 @@ const baseWorkoutData: Record<WorkoutCategory, Record<Location, WorkoutVariant>>
   },
 };
 
-const exercisePool: Record<string, Exercise> = {};
-for (const category of Object.keys(baseWorkoutData) as WorkoutCategory[]) {
-  for (const location of Object.keys(baseWorkoutData[category]) as Location[]) {
-    for (const exercise of baseWorkoutData[category][location].exercises) {
-      exercisePool[exercise.name] = exercise;
-    }
-  }
-}
-
 // Replacement maps for auto-generated variants.
 // If a key is missing or a replacement name can't be found, we fall back to the original exercise.
 const variant1Replacements: Record<string, string> = {
@@ -552,34 +544,7 @@ const variant2Replacements: Record<string, string> = {
   'Plank Jacks': 'Plank to Push-Up',
 };
 
-function mapExercises(base: WorkoutVariant, replacements: Record<string, string>): WorkoutVariant {
-  return {
-    ...base,
-    exercises: base.exercises.map((exercise) => {
-      const replacementName = replacements[exercise.name];
-      const replacement = replacementName ? exercisePool[replacementName] : undefined;
-      return replacement ?? exercise;
-    }),
-  };
-}
+export const workoutDataEn = createWorkoutData(baseWorkoutData, variant1Replacements, variant2Replacements);
 
-function makeWorkoutPlan(base: WorkoutVariant): WorkoutPlan {
-  return {
-    variants: [base, mapExercises(base, variant1Replacements), mapExercises(base, variant2Replacements)],
-  };
-}
-
-export const workoutData: Record<WorkoutCategory, Record<Location, WorkoutPlan>> = {
-  upper: {
-    gym: makeWorkoutPlan(baseWorkoutData.upper.gym),
-    home: makeWorkoutPlan(baseWorkoutData.upper.home),
-  },
-  lower: {
-    gym: makeWorkoutPlan(baseWorkoutData.lower.gym),
-    home: makeWorkoutPlan(baseWorkoutData.lower.home),
-  },
-  full: {
-    gym: makeWorkoutPlan(baseWorkoutData.full.gym),
-    home: makeWorkoutPlan(baseWorkoutData.full.home),
-  },
-};
+/** English workout data (default export for backward compatibility). */
+export const workoutData = workoutDataEn;

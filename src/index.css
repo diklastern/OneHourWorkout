@@ -11,6 +11,16 @@
     @apply bg-white text-gray-900 dark:bg-black dark:text-white;
     font-feature-settings: "kern" 1, "liga" 1;
   }
+
+  html[lang='he'] body {
+    font-family:
+      'Segoe UI',
+      'Arial Hebrew',
+      'David',
+      'Noto Sans Hebrew',
+      system-ui,
+      sans-serif;
+  }
 }
 
 @layer utilities {

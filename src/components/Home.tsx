@@ -1,5 +1,7 @@
 import { Dumbbell, Sparkles } from 'lucide-react';
 import { WorkoutCategory } from '../types/workout';
+import { useLanguage } from '../contexts/useLanguage';
+import type { AppLanguage } from '../i18n/messages';
 
 interface HomeProps {
   onSelectWorkout: (category: WorkoutCategory) => void;
@@ -7,26 +9,50 @@ interface HomeProps {
 }
 
 export default function Home({ onSelectWorkout, onOpenPreferences }: HomeProps) {
+  const { t, language, setLanguage } = useLanguage();
+
+  const langBtn = (lang: AppLanguage, label: string) => (
+    <button
+      type="button"
+      onClick={() => setLanguage(lang)}
+      className={`px-3 py-2 transition-colors ${
+        language === lang
+          ? 'bg-pink-300/15 text-pink-500 dark:text-pink-300'
+          : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+      }`}
+    >
+      {label}
+    </button>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-900 flex flex-col items-center justify-center p-6">
-      <div className="w-full max-w-md flex justify-end mb-8">
+      <div className="w-full max-w-md flex justify-between items-center mb-8 gap-2">
+        <div
+          className="flex rounded-full border-2 border-gray-200 dark:border-gray-700 overflow-hidden text-sm font-semibold"
+          role="group"
+          aria-label={t('language')}
+        >
+          {langBtn('en', t('languageEnglish'))}
+          {langBtn('he', t('languageHebrew'))}
+        </div>
         <button
           onClick={onOpenPreferences}
-          className="px-4 py-2 rounded-full text-sm font-semibold border-2 border-gray-200 text-gray-600 hover:text-gray-900 hover:border-pink-300 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white transition-all"
+          className="px-4 py-2 rounded-full text-sm font-semibold border-2 border-gray-200 text-gray-600 hover:text-gray-900 hover:border-pink-300 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white transition-all shrink-0"
         >
-          Preferences
+          {t('preferences')}
         </button>
       </div>
 
       <div className="text-center mb-12 animate-fade-in">
         <div className="flex items-center justify-center mb-4">
-          <Sparkles className="w-12 h-12 text-pink-400 mr-2" />
+          <Sparkles className="w-12 h-12 text-pink-400 me-2" />
           <h1 className="text-5xl md:text-6xl font-black text-gray-900 dark:text-white tracking-tight">
-            ONE HOUR
+            {t('heroTitle')}
           </h1>
         </div>
-        <p className="text-xl text-gray-600 dark:text-gray-400 font-light tracking-wide">
-          Your one-hour workout routine for women
+        <p className="text-xl text-gray-600 dark:text-gray-400 font-light tracking-wide max-w-md mx-auto">
+          {t('heroSubtitle')}
         </p>
       </div>
 
@@ -38,12 +64,12 @@ export default function Home({ onSelectWorkout, onOpenPreferences }: HomeProps) 
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white group-hover:text-pink-400 transition-colors">
-                Upper Body
+                {t('upperBody')}
               </h2>
-              <Dumbbell className="w-8 h-8 text-pink-400 opacity-70 group-hover:opacity-100 transition-opacity" />
+              <Dumbbell className="w-8 h-8 text-pink-400 opacity-70 group-hover:opacity-100 transition-opacity shrink-0" />
             </div>
-            <p className="text-gray-600 dark:text-gray-400 text-sm font-light">
-              Chest, Back, Arms & Shoulders
+            <p className="text-gray-600 dark:text-gray-400 text-sm font-light text-start">
+              {t('upperBodyDesc')}
             </p>
           </div>
           <div className="absolute inset-0 bg-gradient-to-r from-pink-400/0 to-pink-400/5 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -56,12 +82,12 @@ export default function Home({ onSelectWorkout, onOpenPreferences }: HomeProps) 
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white group-hover:text-rose-400 transition-colors">
-                Lower Body
+                {t('lowerBody')}
               </h2>
-              <Dumbbell className="w-8 h-8 text-rose-400 opacity-70 group-hover:opacity-100 transition-opacity" />
+              <Dumbbell className="w-8 h-8 text-rose-400 opacity-70 group-hover:opacity-100 transition-opacity shrink-0" />
             </div>
-            <p className="text-gray-600 dark:text-gray-400 text-sm font-light">
-              Quads, Hamstrings, Glutes & Calves
+            <p className="text-gray-600 dark:text-gray-400 text-sm font-light text-start">
+              {t('lowerBodyDesc')}
             </p>
           </div>
           <div className="absolute inset-0 bg-gradient-to-r from-rose-400/0 to-rose-400/5 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -74,12 +100,12 @@ export default function Home({ onSelectWorkout, onOpenPreferences }: HomeProps) 
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white group-hover:text-fuchsia-400 transition-colors">
-                Full Body
+                {t('fullBody')}
               </h2>
-              <Dumbbell className="w-8 h-8 text-fuchsia-400 opacity-70 group-hover:opacity-100 transition-opacity" />
+              <Dumbbell className="w-8 h-8 text-fuchsia-400 opacity-70 group-hover:opacity-100 transition-opacity shrink-0" />
             </div>
-            <p className="text-gray-600 dark:text-gray-400 text-sm font-light">
-              Complete Head-to-Toe Training
+            <p className="text-gray-600 dark:text-gray-400 text-sm font-light text-start">
+              {t('fullBodyDesc')}
             </p>
           </div>
           <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-400/0 to-fuchsia-400/5 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -87,7 +113,7 @@ export default function Home({ onSelectWorkout, onOpenPreferences }: HomeProps) 
       </div>
 
       <div className="mt-12 text-center text-gray-600 dark:text-gray-500 text-sm">
-        <p className="font-light">60-minute structured workout routine</p>
+        <p className="font-light">{t('footerNote')}</p>
       </div>
     </div>
   );

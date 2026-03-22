@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Home from './components/Home';
 import WorkoutView from './components/WorkoutView';
 import Preferences from './components/Preferences';
 import { WorkoutCategory } from './types/workout';
 import { loadPreferences, savePreferences, type PreferencesState } from './services/preferences';
+import { LanguageProvider } from './contexts/LanguageContext';
+import type { AppLanguage } from './i18n/messages';
 
 function App() {
   type Screen = 'home' | 'workout' | 'preferences';
@@ -13,6 +15,10 @@ function App() {
   const [selectedWorkout, setSelectedWorkout] = useState<WorkoutCategory | null>(null);
   const [preferences, setPreferences] = useState<PreferencesState>(() => loadPreferences());
 
+  const setLanguage = useCallback((language: AppLanguage) => {
+    setPreferences((p) => ({ ...p, language }));
+  }, []);
+
   useEffect(() => {
     savePreferences(preferences);
   }, [preferences]);
@@ -21,6 +27,11 @@ function App() {
     // Enables Tailwind dark mode utilities (configured in Tailwind settings).
     document.documentElement.classList.toggle('dark', preferences.theme === 'dark');
   }, [preferences.theme]);
+
+  useEffect(() => {
+    document.documentElement.lang = preferences.language === 'he' ? 'he' : 'en';
+    document.documentElement.dir = preferences.language === 'he' ? 'rtl' : 'ltr';
+  }, [preferences.language]);
 
   const handleSelectWorkout = (category: WorkoutCategory) => {
     setSelectedWorkout(category);
@@ -48,7 +59,7 @@ function App() {
   };
 
   return (
-    <>
+    <LanguageProvider language={preferences.language} setLanguage={setLanguage}>
       {screen === 'home' && (
         <Home onSelectWorkout={handleSelectWorkout} onOpenPreferences={() => openPreferences('home')} />
       )}
@@ -63,7 +74,7 @@ function App() {
       {screen === 'preferences' && (
         <Preferences preferences={preferences} onChange={setPreferences} onBack={closePreferences} />
       )}
-    </>
+    </LanguageProvider>
   );
 }
 

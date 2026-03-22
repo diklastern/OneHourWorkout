@@ -14,8 +14,13 @@ export function getRotationIndex(date: Date = new Date()): number {
   return mod(Math.floor(daysSinceAnchor / PERIOD_DAYS), VARIANT_COUNT);
 }
 
-export function getRotationLabel(rotationIndex: number): string {
-  // 0 -> "Cycle A", 1 -> "Cycle B", 2 -> "Cycle C"
+import type { AppLanguage } from '../i18n/messages';
+
+export function getRotationLabel(rotationIndex: number, lang: AppLanguage = 'en'): string {
+  if (lang === 'he') {
+    const letters = ['א', 'ב', 'ג'] as const;
+    return `מחזור ${letters[mod(rotationIndex, VARIANT_COUNT)]}`;
+  }
   const letters = ['A', 'B', 'C'] as const;
   return `Cycle ${letters[mod(rotationIndex, VARIANT_COUNT)]}`;
 }

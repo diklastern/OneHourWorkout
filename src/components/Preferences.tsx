@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 import type { PreferencesState } from '../services/preferences';
+import { useLanguage } from '../contexts/useLanguage';
+import type { AppLanguage } from '../i18n/messages';
 
 interface PreferencesProps {
   preferences: PreferencesState;
@@ -8,7 +10,23 @@ interface PreferencesProps {
 }
 
 export default function Preferences({ preferences, onChange, onBack }: PreferencesProps) {
-  const themeLabel = useMemo(() => (preferences.theme === 'dark' ? 'Dark' : 'Light'), [preferences.theme]);
+  const { t, language, setLanguage } = useLanguage();
+
+  const themeLabel = useMemo(() => (preferences.theme === 'dark' ? t('dark') : t('light')), [preferences.theme, t]);
+
+  const langBtn = (lang: AppLanguage, label: string) => (
+    <button
+      type="button"
+      onClick={() => setLanguage(lang)}
+      className={`px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all ${
+        language === lang
+          ? 'border-pink-300 text-pink-300 bg-pink-300/10'
+          : 'border-gray-200 text-gray-600 hover:text-gray-900 hover:border-gray-300 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:hover:border-gray-600'
+      }`}
+    >
+      {label}
+    </button>
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-900">
@@ -19,10 +37,10 @@ export default function Preferences({ preferences, onChange, onBack }: Preferenc
               onClick={onBack}
               className="flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
             >
-              <span className="text-sm font-medium">Back</span>
+              <span className="text-sm font-medium">{t('back')}</span>
             </button>
             <div className="flex items-center gap-2">
-              <span className="text-sm font-bold text-pink-300">PREFERENCES</span>
+              <span className="text-sm font-bold text-pink-300">{t('prefsTitle')}</span>
             </div>
           </div>
         </div>
@@ -31,10 +49,20 @@ export default function Preferences({ preferences, onChange, onBack }: Preferenc
       <div className="max-w-2xl mx-auto px-6 py-10">
         <div className="space-y-8">
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Theme</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('language')}</h2>
+            <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{t('languageSectionDesc')}</p>
+            <div className="flex gap-3 flex-wrap">
+              {langBtn('en', t('languageEnglish'))}
+              {langBtn('he', t('languageHebrew'))}
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('theme')}</h2>
             <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
-              Choose a look that feels right: currently{' '}
-              <span className="font-semibold text-gray-900 dark:text-white">{themeLabel}</span>.
+              {t('themePick')}
+              <span className="font-semibold text-gray-900 dark:text-white"> {themeLabel}</span>
+              {language === 'en' ? '.' : ''}
             </p>
 
             <div className="flex gap-3 flex-wrap">
@@ -46,7 +74,7 @@ export default function Preferences({ preferences, onChange, onBack }: Preferenc
                     : 'border-gray-200 text-gray-600 hover:text-gray-900 hover:border-gray-300 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:hover:border-gray-600'
                 }`}
               >
-                Dark
+                {t('dark')}
               </button>
               <button
                 onClick={() => onChange({ ...preferences, theme: 'light' })}
@@ -56,14 +84,14 @@ export default function Preferences({ preferences, onChange, onBack }: Preferenc
                     : 'border-gray-200 text-gray-600 hover:text-gray-900 hover:border-gray-300 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:hover:border-gray-600'
                 }`}
               >
-                Light
+                {t('light')}
               </button>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Workout Defaults</h2>
-            <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">Pick what you see when you enter your workout.</p>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('workoutDefaults')}</h2>
+            <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{t('workoutDefaultsDesc')}</p>
 
             <div className="flex gap-3 flex-wrap">
               <button
@@ -74,7 +102,7 @@ export default function Preferences({ preferences, onChange, onBack }: Preferenc
                     : 'border-gray-200 text-gray-600 hover:text-gray-900 hover:border-gray-300 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:hover:border-gray-600'
                 }`}
               >
-                Gym
+                {t('gym')}
               </button>
               <button
                 onClick={() => onChange({ ...preferences, defaultLocation: 'home' })}
@@ -84,7 +112,7 @@ export default function Preferences({ preferences, onChange, onBack }: Preferenc
                     : 'border-gray-200 text-gray-600 hover:text-gray-900 hover:border-gray-300 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:hover:border-gray-600'
                 }`}
               >
-                Home
+                {t('home')}
               </button>
             </div>
           </section>
@@ -93,4 +121,3 @@ export default function Preferences({ preferences, onChange, onBack }: Preferenc
     </div>
   );
 }
-
