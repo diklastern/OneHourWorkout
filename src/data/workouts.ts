@@ -290,22 +290,10 @@ const baseWorkoutData: Record<WorkoutCategory, Record<Location, WorkoutVariant>>
     gym: {
       exercises: [
         {
-          name: 'Barbell Deadlifts',
-          targetMuscle: 'Full Posterior Chain',
-          setsReps: '4 sets of 6-8 reps',
-          proTip: 'Keep bar close to body, chest up, drive through heels. The king of all exercises.',
-        },
-        {
           name: 'Incline Dumbbell Press',
           targetMuscle: 'Upper Chest, Shoulders',
           setsReps: '3 sets of 10-12 reps',
           proTip: 'Bench at 30-45 degrees. Press dumbbells up and slightly together at top.',
-        },
-        {
-          name: 'Front Squats',
-          targetMuscle: 'Quads, Core, Upper Back',
-          setsReps: '4 sets of 8-10 reps',
-          proTip: 'Bar rests on front delts. Keep elbows high, core tight. More quad-dominant than back squats.',
         },
         {
           name: 'Pull-Ups',
@@ -469,9 +457,7 @@ const variant1Replacements: Record<string, string> = {
   'Step-Ups': 'Bulgarian Split Squats',
   'Wall Sit': 'Leg Curls',
 
-  'Barbell Deadlifts': 'Romanian Deadlifts',
   'Incline Dumbbell Press': 'Push-Ups',
-  'Front Squats': 'Barbell Back Squats',
   'Pull-Ups': 'Lat Pulldown',
   'Dumbbell Arnold Press': 'Overhead Press',
   'Cable Wood Chops': 'Cable Rows',
@@ -479,7 +465,7 @@ const variant1Replacements: Record<string, string> = {
   'Plank to Push-Up': 'Push-Up to T-Rotation',
 
   'Burpees': 'Jump Squats',
-  'Dumbbell Thrusters': 'Front Squats',
+  'Dumbbell Thrusters': 'Goblet Squats',
   'Renegade Rows': 'Cable Wood Chops',
   'Jump Squats': 'Burpees',
   'Push-Up to T-Rotation': 'Plank to Push-Up',
@@ -507,7 +493,7 @@ const variant2Replacements: Record<string, string> = {
   'Dumbbell Lateral Raises': 'Face Pulls',
   'Pike Push-Ups': 'Plank to Push-Up',
 
-  'Barbell Back Squats': 'Front Squats',
+  'Barbell Back Squats': 'Goblet Squats',
   'Romanian Deadlifts': 'Glute Bridges',
   'Leg Press': 'Wall Sit',
   'Walking Lunges': 'Walking Dumbbell Lunges',
@@ -525,9 +511,7 @@ const variant2Replacements: Record<string, string> = {
   'Step-Ups': 'Wall Sit',
   'Wall Sit': 'Reverse Lunges',
 
-  'Barbell Deadlifts': 'Barbell Back Squats',
   'Incline Dumbbell Press': 'Dumbbell Thrusters',
-  'Front Squats': 'Goblet Squats',
   'Pull-Ups': 'Pull-Ups or Resistance Band Pulldowns',
   'Dumbbell Arnold Press': 'Dumbbell Shoulder Press',
   'Cable Wood Chops': 'Renegade Rows',
