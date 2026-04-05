@@ -41,18 +41,6 @@ const baseWorkoutData: Record<WorkoutCategory, Record<Location, WorkoutVariant>>
           setsReps: '3 sets of 12-15 reps',
           proTip: 'Keep elbows tucked close to your body. Fully extend at the bottom and squeeze.',
         },
-        {
-          name: 'Cable Lateral Raises',
-          targetMuscle: 'Side Delts',
-          setsReps: '3 sets of 12-15 reps',
-          proTip: 'Raise arms to shoulder height with a slight bend in elbows. Lead with your elbows, not hands.',
-        },
-        {
-          name: 'Face Pulls',
-          targetMuscle: 'Rear Delts, Upper Back',
-          setsReps: '3 sets of 15 reps',
-          proTip: 'Pull rope towards your face, externally rotating shoulders. Great for posture and shoulder health.',
-        },
       ],
       stretches: [
         {
@@ -110,18 +98,6 @@ const baseWorkoutData: Record<WorkoutCategory, Record<Location, WorkoutVariant>>
           targetMuscle: 'Triceps',
           setsReps: '3 sets of 12-15 reps',
           proTip: 'Hold one dumbbell overhead with both hands. Lower behind head, keeping elbows stationary.',
-        },
-        {
-          name: 'Dumbbell Lateral Raises',
-          targetMuscle: 'Side Delts',
-          setsReps: '3 sets of 12-15 reps',
-          proTip: 'Raise arms to shoulder height with slight bend. Pour the water pitcher at the top.',
-        },
-        {
-          name: 'Pike Push-Ups',
-          targetMuscle: 'Shoulders, Upper Chest',
-          setsReps: '3 sets of 10-12 reps',
-          proTip: 'Start in downward dog position. Lower head towards ground between hands.',
         },
       ],
       stretches: [
@@ -183,18 +159,6 @@ const baseWorkoutData: Record<WorkoutCategory, Record<Location, WorkoutVariant>>
           setsReps: '4 sets of 15-20 reps',
           proTip: 'Full range of motion - stretch at bottom, rise as high as possible on toes.',
         },
-        {
-          name: 'Bulgarian Split Squats',
-          targetMuscle: 'Quads, Glutes',
-          setsReps: '3 sets of 10 reps per leg',
-          proTip: 'Rear foot elevated on bench. Front knee stays behind toes as you lower down.',
-        },
-        {
-          name: 'Glute Kickbacks',
-          targetMuscle: 'Glutes',
-          setsReps: '3 sets of 15 reps per leg',
-          proTip: 'Keep core tight and back neutral. Squeeze glute at top of movement.',
-        },
       ],
       stretches: [
         {
@@ -252,18 +216,6 @@ const baseWorkoutData: Record<WorkoutCategory, Record<Location, WorkoutVariant>>
           targetMuscle: 'Calves',
           setsReps: '4 sets of 20 reps',
           proTip: 'Use step for greater range. Can hold dumbbells for added resistance.',
-        },
-        {
-          name: 'Step-Ups',
-          targetMuscle: 'Quads, Glutes',
-          setsReps: '3 sets of 12 reps per leg',
-          proTip: 'Use sturdy chair or box. Drive through heel of elevated foot, stand fully at top.',
-        },
-        {
-          name: 'Wall Sit',
-          targetMuscle: 'Quads, Glutes',
-          setsReps: '3 sets of 45-60 seconds',
-          proTip: 'Back flat against wall, thighs parallel to ground. Breathe steadily throughout.',
         },
       ],
       stretches: [
@@ -427,35 +379,27 @@ const variant1Replacements: Record<string, string> = {
   'Lat Pulldown': 'Pull-Ups or Resistance Band Pulldowns',
   'Dumbbell Bicep Curls': 'Dumbbell Hammer Curls',
   'Tricep Rope Pushdowns': 'Dumbbell Overhead Tricep Extension',
-  'Cable Lateral Raises': 'Face Pulls',
-  'Face Pulls': 'Dumbbell Lateral Raises',
 
-  'Push-Ups': 'Pike Push-Ups',
+  'Push-Ups': 'Incline Dumbbell Press',
   'Dumbbell Rows': 'Cable Rows',
   'Dumbbell Shoulder Press': 'Overhead Press',
   'Pull-Ups or Resistance Band Pulldowns': 'Lat Pulldown',
   'Dumbbell Hammer Curls': 'Dumbbell Bicep Curls',
   'Dumbbell Overhead Tricep Extension': 'Tricep Rope Pushdowns',
-  'Dumbbell Lateral Raises': 'Cable Lateral Raises',
-  'Pike Push-Ups': 'Push-Ups',
 
   'Barbell Back Squats': 'Goblet Squats',
   'Romanian Deadlifts': 'Single-Leg Romanian Deadlifts',
-  'Leg Press': 'Step-Ups',
+  'Leg Press': 'Walking Lunges',
   'Walking Lunges': 'Reverse Lunges',
   'Leg Curls': 'Glute Bridges',
   'Calf Raises': 'Standing Calf Raises',
-  'Bulgarian Split Squats': 'Wall Sit',
-  'Glute Kickbacks': 'Glute Bridges',
 
   'Bodyweight Squats': 'Leg Press',
   'Single-Leg Romanian Deadlifts': 'Romanian Deadlifts',
   'Goblet Squats': 'Barbell Back Squats',
   'Reverse Lunges': 'Walking Lunges',
-  'Glute Bridges': 'Glute Kickbacks',
+  'Glute Bridges': 'Leg Curls',
   'Standing Calf Raises': 'Calf Raises',
-  'Step-Ups': 'Bulgarian Split Squats',
-  'Wall Sit': 'Leg Curls',
 
   'Incline Dumbbell Press': 'Push-Ups',
   'Pull-Ups': 'Lat Pulldown',
@@ -470,19 +414,17 @@ const variant1Replacements: Record<string, string> = {
   'Jump Squats': 'Burpees',
   'Push-Up to T-Rotation': 'Plank to Push-Up',
   'Mountain Climbers': 'Plank Jacks',
-  'Dumbbell Step-Ups with Press': 'Step-Ups',
+  'Dumbbell Step-Ups with Press': 'Goblet Squats',
   'Plank Jacks': 'Mountain Climbers',
 };
 
 const variant2Replacements: Record<string, string> = {
-  'Barbell Bench Press': 'Pike Push-Ups',
+  'Barbell Bench Press': 'Push-Ups',
   'Cable Rows': 'Dumbbell Rows',
   'Overhead Press': 'Dumbbell Shoulder Press',
   'Lat Pulldown': 'Pull-Ups',
   'Dumbbell Bicep Curls': 'Dumbbell Hammer Curls',
   'Tricep Rope Pushdowns': 'Dumbbell Overhead Tricep Extension',
-  'Cable Lateral Raises': 'Dumbbell Lateral Raises',
-  'Face Pulls': 'Cable Lateral Raises',
 
   'Push-Ups': 'Dumbbell Rows',
   'Dumbbell Rows': 'Renegade Rows',
@@ -490,26 +432,20 @@ const variant2Replacements: Record<string, string> = {
   'Pull-Ups or Resistance Band Pulldowns': 'Pull-Ups',
   'Dumbbell Hammer Curls': 'Dumbbell Bicep Curls',
   'Dumbbell Overhead Tricep Extension': 'Tricep Rope Pushdowns',
-  'Dumbbell Lateral Raises': 'Face Pulls',
-  'Pike Push-Ups': 'Plank to Push-Up',
 
   'Barbell Back Squats': 'Goblet Squats',
   'Romanian Deadlifts': 'Glute Bridges',
-  'Leg Press': 'Wall Sit',
+  'Leg Press': 'Glute Bridges',
   'Walking Lunges': 'Walking Dumbbell Lunges',
-  'Leg Curls': 'Glute Kickbacks',
+  'Leg Curls': 'Romanian Deadlifts',
   'Calf Raises': 'Standing Calf Raises',
-  'Bulgarian Split Squats': 'Step-Ups',
-  'Glute Kickbacks': 'Leg Curls',
 
   'Bodyweight Squats': 'Goblet Squats',
-  'Single-Leg Romanian Deadlifts': 'Glute Kickbacks',
+  'Single-Leg Romanian Deadlifts': 'Romanian Deadlifts',
   'Goblet Squats': 'Leg Press',
   'Reverse Lunges': 'Walking Dumbbell Lunges',
   'Glute Bridges': 'Leg Curls',
   'Standing Calf Raises': 'Calf Raises',
-  'Step-Ups': 'Wall Sit',
-  'Wall Sit': 'Reverse Lunges',
 
   'Incline Dumbbell Press': 'Dumbbell Thrusters',
   'Pull-Ups': 'Pull-Ups or Resistance Band Pulldowns',
@@ -524,7 +460,7 @@ const variant2Replacements: Record<string, string> = {
   'Jump Squats': 'Walking Lunges',
   'Push-Up to T-Rotation': 'Push-Ups',
   'Mountain Climbers': 'Plank Jacks',
-  'Dumbbell Step-Ups with Press': 'Bulgarian Split Squats',
+  'Dumbbell Step-Ups with Press': 'Goblet Squats',
   'Plank Jacks': 'Plank to Push-Up',
 };
 
